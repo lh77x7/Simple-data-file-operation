@@ -1,14 +1,29 @@
 import os
+import os.path
 
 #function createFile
 def createFile():
-    pass
+    if os.path.isfile('dataFile.txt'):
+        print("\nFile exists")
+    else:
+        f=open("dataFile.txt", "x")
+        print("\nFile created. Done")
+        f.close()
 
 #end function
 
 #function readFile
 def readFile():
-    pass
+    try:
+        result=os.stat("dataFile.txt")
+        if result.st_size!=1:
+            print("\nFile is empty")
+        else:
+            f = open("dataFile.txt", "r")
+            print (f.readlines())
+            f.close()
+    except FileNotFoundError:
+        print("\nFile doesn't not exist")
 
 #end function
 
