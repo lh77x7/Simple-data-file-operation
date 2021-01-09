@@ -1,4 +1,3 @@
-import os
 import os.path
 
 #function createFile
@@ -15,27 +14,36 @@ def createFile():
 #function readFile
 def readFile():
     try:
-        result=os.stat("dataFile.txt")
-        if result.st_size!=1:
-            print("\nFile is empty")
-        else:
-            f = open("dataFile.txt", "r")
-            print (f.readlines())
-            f.close()
+        f = open("dataFile.txt", "r")
+        print (f.readlines())
+        f.close()
     except FileNotFoundError:
         print("\nFile doesn't not exist")
+        createFile()
+        return
 
 #end function
 
 #function overwriteFile
-def overwriteFile():
-    pass
+def writeToFile():
+    try:
+        f = open("dataFile.txt", "a")
+        f.writelines("\nNew content")
+        f.close()
+    except FileNotFoundError:
+        print("\nFile doesn't not exist")
+        createFile()
+        return
 
 #end function
 
 #function deleteFile
 def deleteFile():
-    pass
+    try:
+        os.remove('dataFile.txt')
+        print("\nFile deleted.")
+    except FileNotFoundError:
+        print("\nFile doesn\'t not exist. Nothing deleted.")
 
 #end function
 
@@ -53,7 +61,7 @@ while(True):
     elif choice==2:
         readFile()
     elif choice==3:
-        overwriteFile()
+        writeToFile()
     elif choice==4:
         deleteFile()
     elif choice==5:
